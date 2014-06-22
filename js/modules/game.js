@@ -25,7 +25,10 @@ var loader = new PIXI.AssetLoader(['assets/img/redbrick.png',
                                    'assets/img/greystone.png',
                                    'assets/img/bluestone.png',
                                    'assets/img/eagle.png',
-                                   'assets/img/colorstone.png'], 
+                                   'assets/img/colorstone.png',
+                                   'assets/img/barrel.png',
+                                   'assets/img/greenlight.png',
+                                   'assets/img/pillar.png'], 
                                    true);
 loader.load();
 

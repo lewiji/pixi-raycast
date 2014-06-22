@@ -98,10 +98,10 @@ function drawWalls(camera, map) {
     }
     tint = 0xFFFFFF;
     if (side == 1) {
-      tint -= 0x333333;
+      tint -= 0x444444;
     }
 
-    tint -= (0x010101 * Math.round(perpWallDist * 8));
+    tint -= (0x010101 * Math.round(perpWallDist * 12));
 
     if (tint <= 0x000000) {
       tint = 0x000000;

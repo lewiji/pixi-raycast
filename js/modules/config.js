@@ -1,6 +1,6 @@
 var Config = {
-    screenWidth: 800,
-    screenHeight: 450,
+    screenWidth: 640,
+    screenHeight: 360,
     texWidth: 64,
     texHeight: 64
 }
