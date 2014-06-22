@@ -14653,8 +14653,8 @@ Camera.prototype.update = function (dt) {
 module.exports = Camera;
 },{}],3:[function(require,module,exports){
 var Config = {
-    screenWidth: 800,
-    screenHeight: 450,
+    screenWidth: 1280,
+    screenHeight: 780,
     texWidth: 64,
     texHeight: 64
 }
@@ -14793,7 +14793,7 @@ function Map() {
     this.skybox = new PIXI.TilingSprite(this.skyTexture, Config.screenWidth, Config.screenHeight);
     this.skybox.generateTilingTexture(false);
     this.skybox.alpha = 0.6;
-    this.skybox.tileScale = {x: 0.5, y: 0.5};
+    this.skybox.tileScale = {x: 0.5, y: 0.8};
     UI.getLayer('skybox').addChild(this.skybox);
 }
 
