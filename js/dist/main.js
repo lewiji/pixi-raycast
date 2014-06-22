@@ -14653,8 +14653,8 @@ Camera.prototype.update = function (dt) {
 module.exports = Camera;
 },{}],3:[function(require,module,exports){
 var Config = {
-    screenWidth: 1280,
-    screenHeight: 780,
+    screenWidth: 640,
+    screenHeight: 360,
     texWidth: 64,
     texHeight: 64
 }
@@ -14688,7 +14688,10 @@ var loader = new PIXI.AssetLoader(['assets/img/redbrick.png',
                                    'assets/img/greystone.png',
                                    'assets/img/bluestone.png',
                                    'assets/img/eagle.png',
-                                   'assets/img/colorstone.png'], 
+                                   'assets/img/colorstone.png',
+                                   'assets/img/barrel.png',
+                                   'assets/img/greenlight.png',
+                                   'assets/img/pillar.png'], 
                                    true);
 loader.load();
 
@@ -14790,10 +14793,10 @@ function Map() {
       [2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5]
     ];
     this.skyTexture = new PIXI.Texture.fromImage('assets/img/skybox.png');
-    this.skybox = new PIXI.TilingSprite(this.skyTexture, Config.screenWidth, Config.screenHeight);
+    this.skybox = new PIXI.TilingSprite(this.skyTexture, Config.screenWidth, Config.screenHeight / 2);
     this.skybox.generateTilingTexture(false);
     this.skybox.alpha = 0.6;
-    this.skybox.tileScale = {x: 0.5, y: 0.8};
+    this.skybox.tileScale = {x: 0.5, y: 0.4};
     UI.getLayer('skybox').addChild(this.skybox);
 }
 
@@ -15022,10 +15025,10 @@ function drawWalls(camera, map) {
     }
     tint = 0xFFFFFF;
     if (side == 1) {
-      tint -= 0x333333;
+      tint -= 0x444444;
     }
 
-    tint -= (0x010101 * Math.round(perpWallDist * 8));
+    tint -= (0x010101 * Math.round(perpWallDist * 12));
 
     if (tint <= 0x000000) {
       tint = 0x000000;
