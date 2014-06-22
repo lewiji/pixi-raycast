@@ -1,8 +1,7 @@
 var Config = require('./config.js'),
     PIXI = require('../lib/pixi.dev.js'),
     UI = require('./ui.js');
-function Map(size) {
-    this.size = size;
+function Map() {
     this.wallGrid = [
       [8,8,8,8,8,8,8,8,8,8,8,4,4,6,4,4,6,4,6,4,4,4,6,4],
       [8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4],
