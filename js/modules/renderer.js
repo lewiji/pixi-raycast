@@ -1,11 +1,7 @@
 var rayIdx, cameraX, rayPosX, rayPosY, rayDirX, rayDirY, mapX, mapY, 
         sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
         stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0, 
-        oldTime = 0, frameTime, moveSpeed, rotSpeed, oldDirX, oldPlaneX,
-        texNum, wallX, texX, drawY, drawD, drawTexY, wall, batchIdx, tint,
-        moveGun, gunDy = 0, gunUp = true, gunFiring = false, floorXWall, floorYWall,
-        distWall, distPlayer, currentDist, floorTexX, floorTexY, currentFloorX,
-        currentFloorY, weight, y;
+        oldTime = 0, frameTime, tint;
 
 var Key = require('./input.js'),
     Config = require('./config.js'),
