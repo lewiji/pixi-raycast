@@ -14801,6 +14801,7 @@ function Map() {
 }
 
 module.exports = Map;
+
 },{"../lib/pixi.dev.js":1,"./config.js":3,"./ui.js":10}],7:[function(require,module,exports){
 var Camera = require('./camera.js'),
     Key = require('./input.js'),
