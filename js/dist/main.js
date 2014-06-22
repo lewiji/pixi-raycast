@@ -14679,10 +14679,16 @@ renderer.view.className = 'game';
 
 // add the renderer view element to the DOM
 document.getElementById('gameContainer').appendChild(renderer.view);
-
 var loader = new PIXI.AssetLoader(['assets/img/redbrick.png', 
                                    'assets/img/pistol.png', 
-                                   'assets/img/skybox.png'], 
+                                   'assets/img/skybox.png',
+                                   'assets/img/wood.png',
+                                   'assets/img/purplestone.png',
+                                   'assets/img/mossy.png',
+                                   'assets/img/greystone.png',
+                                   'assets/img/bluestone.png',
+                                   'assets/img/eagle.png',
+                                   'assets/img/colorstone.png'], 
                                    true);
 loader.load();
 
@@ -14694,18 +14700,22 @@ function animate() {
 }
 
 function start () {
+  // Init textures
   Resources.init();
+  // add layers (DOCs)
   UI.addLayer('skybox');
   UI.addLayer('walls');
   UI.addLayer('gun');
+
   var sprite, walls = UI.getLayer('walls');
+  // Create wall 'slice' sprites (ie rays)
   for (var x = 0; x < Config.screenWidth; x++) {
     sprite = new PIXI.Sprite(Resources.get('texture')[0][4]);
     sprite.position.x = x;
     walls.addChild(sprite);
   }
 
-  var map = new Map(24);
+  var map = new Map();
   var player = new Player(22, 11.5, map);
 
   requestAnimFrame( animate );
@@ -14752,8 +14762,7 @@ module.exports = Key;
 var Config = require('./config.js'),
     PIXI = require('../lib/pixi.dev.js'),
     UI = require('./ui.js');
-function Map(size) {
-    this.size = size;
+function Map() {
     this.wallGrid = [
       [8,8,8,8,8,8,8,8,8,8,8,4,4,6,4,4,6,4,6,4,4,4,6,4],
       [8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4],
@@ -14916,11 +14925,7 @@ module.exports = Player;
 var rayIdx, cameraX, rayPosX, rayPosY, rayDirX, rayDirY, mapX, mapY, 
         sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
         stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0, 
-        oldTime = 0, frameTime, moveSpeed, rotSpeed, oldDirX, oldPlaneX,
-        texNum, wallX, texX, drawY, drawD, drawTexY, wall, batchIdx, tint,
-        moveGun, gunDy = 0, gunUp = true, gunFiring = false, floorXWall, floorYWall,
-        distWall, distPlayer, currentDist, floorTexX, floorTexY, currentFloorX,
-        currentFloorY, weight, y;
+        oldTime = 0, frameTime, tint;
 
 var Key = require('./input.js'),
     Config = require('./config.js'),
