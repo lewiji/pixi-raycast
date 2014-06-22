@@ -1,0 +1,53 @@
+var PIXI = require('../lib/pixi.dev.js'),
+    Map = require('./map.js'),
+    Player = require('./player.js'),
+    update = require('./renderer.js'),
+    Resources = require('./resources.js'),
+    Config = require('./config.js'),
+    UI = require('./ui.js');
+// create an new instance of a pixi stage
+window.stage = new PIXI.Stage(0x000000);
+
+PIXI.scaleModes.DEFAULT = PIXI.scaleModes.NEAREST;
+// create a renderer instance.
+var renderer = PIXI.autoDetectRenderer(Config.screenWidth, Config.screenHeight, undefined, true, false);
+
+renderer.view.className = 'game';
+
+// add the renderer view element to the DOM
+document.getElementById('gameContainer').appendChild(renderer.view);
+
+var loader = new PIXI.AssetLoader(['assets/img/redbrick.png', 
+                                   'assets/img/pistol.png', 
+                                   'assets/img/skybox.png'], 
+                                   true);
+loader.load();
+
+loader.onComplete = start;
+
+function animate() {
+    requestAnimFrame(animate);
+    renderer.render(stage);
+}
+
+function start () {
+  Resources.init();
+  UI.addLayer('skybox');
+  UI.addLayer('walls');
+  UI.addLayer('gun');
+  var sprite, walls = UI.getLayer('walls');
+  for (var x = 0; x < Config.screenWidth; x++) {
+    sprite = new PIXI.Sprite(Resources.get('texture')[0][4]);
+    sprite.position.x = x;
+    walls.addChild(sprite);
+  }
+
+  var map = new Map(24);
+  var player = new Player(22, 11.5, map);
+
+  requestAnimFrame( animate );
+  setInterval(function () {
+    update(player);
+  }, 1000/60);
+}
+
