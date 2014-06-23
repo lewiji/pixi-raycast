@@ -1,14 +1,11 @@
 // Declaring all the variables outside of the loop is more efficient, 
 // and works well with the original c++ code which is very procedural
 var rayIdx, cameraX, rayPosX, rayPosY, rayDirX, rayDirY, mapX, mapY, 
-        sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
-        stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0, 
-<<<<<<< HEAD
-        oldTime = 0, frameTime, tint, zBuffer = [], spriteOrder = [], 
-        spriteDistance = [], spriteIdx;
-=======
-        oldTime = 0, frameTime, tint, shadowDepth = 12;
->>>>>>> d300a85cfde9b8b3a7a3e02517ffc1068a2f007f
+    sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
+    stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0,
+    oldTime = 0, frameTime, tint, zBuffer = [], spriteOrder = [], 
+    spriteDistance = [], spriteIdx, oldTime = 0, frameTime, tint, 
+    shadowDepth = 12;
 
 var Key = require('./input.js'),
     Config = require('./config.js'),
@@ -126,16 +123,11 @@ function drawWalls(camera, map) {
     // Grab the texture slice (these are presliced on load so 
     // no need for pixel buffer antics)
     line.setTexture(Resources.get('texture')[texNum][texX]);
-<<<<<<< HEAD
-    line.position.y = Math.floor(drawStart);
-    line.height = Math.floor(drawEnd - drawStart);
+    line.position.y = drawStart;
+    line.height = drawEnd - drawStart;
 
     // store z dist for sprites!
     zBuffer[rayIdx] = perpWallDist;
-=======
-    line.position.y = drawStart;
-    line.height = drawEnd - drawStart;
->>>>>>> d300a85cfde9b8b3a7a3e02517ffc1068a2f007f
   }
 
   map.sprites.sort(function (a, b) {
