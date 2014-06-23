@@ -1,3 +1,4 @@
+// Brilliantly simple input code from http://nokarma.org/2011/02/27/javascript-game-development-keyboard-input/
 var Key = {
   _pressed: {},
 

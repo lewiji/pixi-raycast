@@ -1,8 +1,14 @@
+// Declaring all the variables outside of the loop is more efficient, 
+// and works well with the original c++ code which is very procedural
 var rayIdx, cameraX, rayPosX, rayPosY, rayDirX, rayDirY, mapX, mapY, 
         sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
         stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0, 
+<<<<<<< HEAD
         oldTime = 0, frameTime, tint, zBuffer = [], spriteOrder = [], 
         spriteDistance = [], spriteIdx;
+=======
+        oldTime = 0, frameTime, tint, shadowDepth = 12;
+>>>>>>> d300a85cfde9b8b3a7a3e02517ffc1068a2f007f
 
 var Key = require('./input.js'),
     Config = require('./config.js'),
@@ -89,7 +95,9 @@ function drawWalls(camera, map) {
       wallX = rayPosY + ((mapX - rayPosX + (1 - stepX) / 2) / rayDirX) * rayDirY;
     }
     wallX -= Math.floor(wallX);
+    // grab the sprite for this wall slice
     var line = UI.getLayer('walls').children[rayIdx];
+    // the x co-ordinate of the slice of wall texture
     var texX = Math.floor(wallX * Config.texWidth);
     if (side == 0 && rayDirX > 0) {
       texX = Config.texWidth - texX - 1;
@@ -97,25 +105,37 @@ function drawWalls(camera, map) {
     if (side == 1 && rayDirY < 0) {
       texX = Config.texWidth - texX - 1;
     }
+    // Pixi has easy tinting with hex values, let's use this to build a primitive
+    // lighting system. Start out with a white (invisible) tint
     tint = 0xFFFFFF;
     if (side == 1) {
+      // give one orientation of wall a darker tint for contrast
       tint -= 0x444444;
     }
-
-    tint -= (0x010101 * Math.round(perpWallDist * 12));
+    // also tint the slice darker, the further away it is
+    // increase shadowDepth to make the level darker
+    tint -= (0x010101 * Math.round(perpWallDist * shadowDepth));
 
     if (tint <= 0x000000) {
       tint = 0x000000;
     }
-
+    // apply the tint
     line.tint = tint;
+    // grab the texture for the index in the map grid
     texNum = map.wallGrid[mapX][mapY] - 1;
+    // Grab the texture slice (these are presliced on load so 
+    // no need for pixel buffer antics)
     line.setTexture(Resources.get('texture')[texNum][texX]);
+<<<<<<< HEAD
     line.position.y = Math.floor(drawStart);
     line.height = Math.floor(drawEnd - drawStart);
 
     // store z dist for sprites!
     zBuffer[rayIdx] = perpWallDist;
+=======
+    line.position.y = drawStart;
+    line.height = drawEnd - drawStart;
+>>>>>>> d300a85cfde9b8b3a7a3e02517ffc1068a2f007f
   }
 
   map.sprites.sort(function (a, b) {
