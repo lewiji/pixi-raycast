@@ -14643,7 +14643,7 @@ Object.defineProperty(PIXI.RGBSplitFilter.prototype, 'angle', {
 function Camera(x, y) {
     this.position = {x: x, y: y};
     this.direction = {x: -1, y: 0};
-    this.plane = {x: 0, y: 1};
+    this.plane = {x: 0, y:1};
 }
 
 Camera.prototype.update = function (dt) {
@@ -14708,6 +14708,7 @@ function start () {
   // add layers (DOCs)
   UI.addLayer('skybox');
   UI.addLayer('walls');
+  UI.addLayer('sprites');
   UI.addLayer('gun');
 
   var sprite, walls = UI.getLayer('walls');
@@ -14791,6 +14792,9 @@ function Map() {
       [2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5],
       [2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5],
       [2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5]
+    ];
+    this.sprites = [
+      {x:20.5, y:11.5, tex:10}
     ];
     this.skyTexture = new PIXI.Texture.fromImage('assets/img/skybox.png');
     this.skybox = new PIXI.TilingSprite(this.skyTexture, Config.screenWidth, Config.screenHeight / 2);
@@ -14929,7 +14933,8 @@ module.exports = Player;
 var rayIdx, cameraX, rayPosX, rayPosY, rayDirX, rayDirY, mapX, mapY, 
         sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
         stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0, 
-        oldTime = 0, frameTime, tint;
+        oldTime = 0, frameTime, tint, zBuffer = [], spriteOrder = [], 
+        spriteDistance = [], spriteIdx;
 
 var Key = require('./input.js'),
     Config = require('./config.js'),
@@ -15040,7 +15045,22 @@ function drawWalls(camera, map) {
     line.setTexture(Resources.get('texture')[texNum][texX]);
     line.position.y = Math.floor(drawStart);
     line.height = Math.floor(drawEnd - drawStart);
+
+    // store z dist for sprites!
+    zBuffer[rayIdx] = perpWallDist;
   }
+
+  map.sprites.sort(function (a, b) {
+    var distanceA = ((posX - a.x) * (posX - a.x) + (posY - a.y) * (posY - a.y));
+    var distanceB = ((posX - b.x) * (posX - b.x) + (posY - b.y) * (posY - b.y));
+    if (distanceA < distanceB) {
+      return -1
+    }
+    if (distanceA > distanceB) {
+      return 1;
+    }
+    return 0;
+  });
 }
 
 module.exports = update;

@@ -1,7 +1,8 @@
 var rayIdx, cameraX, rayPosX, rayPosY, rayDirX, rayDirY, mapX, mapY, 
         sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
         stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0, 
-        oldTime = 0, frameTime, tint;
+        oldTime = 0, frameTime, tint, zBuffer = [], spriteOrder = [], 
+        spriteDistance = [], spriteIdx;
 
 var Key = require('./input.js'),
     Config = require('./config.js'),
@@ -112,7 +113,22 @@ function drawWalls(camera, map) {
     line.setTexture(Resources.get('texture')[texNum][texX]);
     line.position.y = Math.floor(drawStart);
     line.height = Math.floor(drawEnd - drawStart);
+
+    // store z dist for sprites!
+    zBuffer[rayIdx] = perpWallDist;
   }
+
+  map.sprites.sort(function (a, b) {
+    var distanceA = ((posX - a.x) * (posX - a.x) + (posY - a.y) * (posY - a.y));
+    var distanceB = ((posX - b.x) * (posX - b.x) + (posY - b.y) * (posY - b.y));
+    if (distanceA < distanceB) {
+      return -1
+    }
+    if (distanceA > distanceB) {
+      return 1;
+    }
+    return 0;
+  });
 }
 
 module.exports = update;
