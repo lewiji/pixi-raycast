@@ -45,6 +45,7 @@ function start () {
   // add layers (DOCs)
   UI.addLayer('skybox');
   UI.addLayer('walls');
+  UI.addLayer('sprites');
   UI.addLayer('gun');
 
   var sprite, walls = UI.getLayer('walls');
