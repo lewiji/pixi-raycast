@@ -59,7 +59,7 @@ Player.prototype.update = function (frameTime) {
     }
 
     if (Key.isDown(Key.RIGHT)) {
-      this.map.skybox.tilePosition.x -= 1000 * frameTime;
+      this.map.skybox.tilePosition.x -= 489 * frameTime;
       this.oldDirX = this.direction.x;
       this.direction.x = this.direction.x * Math.cos(-this.rotSpeed) - this.direction.y * Math.sin(-this.rotSpeed);
       this.direction.y = this.oldDirX * Math.sin(-this.rotSpeed) + this.direction.y * Math.cos(-this.rotSpeed);
@@ -69,7 +69,7 @@ Player.prototype.update = function (frameTime) {
     }
 
     if (Key.isDown(Key.LEFT)) {
-      this.map.skybox.tilePosition.x += 1000 * frameTime;
+      this.map.skybox.tilePosition.x += 489 * frameTime;
       this.oldDirX = this.direction.x;
       this.direction.x = this.direction.x * Math.cos(this.rotSpeed) - this.direction.y * Math.sin(this.rotSpeed);
       this.direction.y = this.oldDirX * Math.sin(this.rotSpeed) + this.direction.y * Math.cos(this.rotSpeed);
