@@ -1,7 +1,9 @@
 pixi-raycast
 ============
 
-Simple raycaster built using Pixi.js
+Simple raycaster built using Pixi.js. Requires Browserify to build - http://browserify.org/
+
+    browserify ./js/modules/game.js -o ./js/dist/main.js
 
 Demo: http://lewispollard.github.io/pixi-raycast
 
