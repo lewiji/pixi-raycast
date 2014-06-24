@@ -14932,8 +14932,10 @@ Player.prototype.update = function (frameTime) {
 
 module.exports = Player;
 },{"../lib/pixi.dev.js":1,"./camera.js":2,"./config.js":3,"./input.js":5,"./resources.js":9,"./ui.js":10}],8:[function(require,module,exports){
-// Declaring all the variables outside of the loop is more efficient, 
-// and works well with the original c++ code which is very procedural
+/* Declaring all the variables outside of the loop is more efficient, 
+   and works well with the original c++ code which is very procedural
+   DON'T WORRY - as we're using browserify these will be scoped to
+   this module */
 var rayIdx, cameraX, rayPosX, rayPosY, rayDirX, rayDirY, mapX, mapY, 
     sideDistX, sideDistY, deltaDistX, deltaDistY, perpWallDist, stepX,
     stepY, hit, side, lineHeight, drawStart, drawEnd, color, time = 0,
