@@ -5,7 +5,7 @@ Simple raycaster built using Pixi.js. Requires Browserify to build - http://brow
 
     browserify ./js/modules/game.js -o ./js/dist/main.js
 
-Demo: http://lewispollard.github.io/pixi-raycast
+Demo: https://lewiji.github.io/pixi-raycast/
 
 Inspired by this article: http://www.playfuljs.com/a-first-person-engine-in-265-lines/ - skybox image credit to that and Dan Duriscoe.
 
